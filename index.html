@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundo do Trabalho e Inovações</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #5e60ce, #48bfe3);
+    color: #fff;
+  }
+  header {
+    text-align: center;
+    padding: 60px 20px 30px;
+  }
+  header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  header p {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: auto;
+  }
+  section {
+    max-width: 850px;
+    background: rgba(0, 0, 0, 0.3);
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+  }
+  section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  ul { line-height: 1.7; }
+  .highlight {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  .question { margin: 20px 0; }
+  label {
+    display: block;
+    margin: 6px 0;
+    cursor: pointer;
+  }
+  button {
+    background: #80ed99;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 25px auto;
+  }
+  button:hover { background: #56cfe1; }
+  #result {
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.1em;
+  }
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mundo do Trabalho e Inovações</h1>
+  <p>As inovações estão transformando o trabalho, criando novas oportunidades e desafios.  
+     Descubra como você pode se encaixar nesse novo cenário profissional.</p>
+</header>
+
+<section>
+  <h2>💡 O que está mudando</h2>
+  <ul>
+    <li>A tecnologia redefine tarefas e cria novas profissões.</li>
+    <li>O trabalho está mais conectado, criativo e dinâmico.</li>
+    <li>O profissional do futuro precisa de adaptabilidade e aprendizado contínuo.</li>
+  </ul>
+  <div class="highlight"><strong>“Inovar é transformar o modo como trabalhamos.”</strong></div>
+</section>
+
+<section>
+  <h2>🧠 O Jovem e o Futuro do Trabalho</h2>
+  <ul>
+    <li>Os jovens são protagonistas da era digital.</li>
+    <li>São criativos, conectados e capazes de aprender rápido.</li>
+    <li>Com propósito e inovação, podem criar seus próprios caminhos.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>🧩 Teste: Descubra Seu Perfil Profissional</h2>
+  <p>Responda às perguntas e descubra qual perfil combina mais com você no mundo do trabalho e das inovações.</p>
+
+  <form id="quizForm">
+    <!-- Pergunta 1 -->
+    <div class="question">
+      <h3>1. O que mais te motiva em um trabalho?</h3>
+      <label><input type="radio" name="q1" value="criativo"> Criar e inovar</label>
+      <label><input type="radio" name="q1" value="lider"> Liderar pessoas</label>
+      <label><input type="radio" name="q1" value="analitico"> Resolver problemas complexos</label>
+      <label><input type="radio" name="q1" value="colab"> Ajudar e colaborar</label>
+      <label><input type="radio" name="q1" value="sustentavel"> Contribuir com o planeta</label>
+      <label><input type="radio" name="q1" value="visionario"> Pensar no futuro</label>
+      <label><input type="radio" name="q1" value="tecnologico"> Trabalhar com tecnologia</label>
+    </div>
+
+    <!-- Pergunta 2 -->
+    <div class="question">
+      <h3>2. Qual dessas atividades você mais gosta?</h3>
+      <label><input type="radio" name="q2" value="criativo"> Criar artes ou conteúdos</label>
+      <label><input type="radio" name="q2" value="lider"> Organizar equipes</label>
+      <label><input type="radio" name="q2" value="analitico"> Resolver desafios de lógica</label>
+      <label><input type="radio" name="q2" value="colab"> Trabalhar em grupo</label>
+      <label><input type="radio" name="q2" value="sustentavel"> Projetos ambientais</label>
+      <label><input type="radio" name="q2" value="visionario"> Pensar em ideias de futuro</label>
+      <label><input type="radio" name="q2" value="tecnologico"> Programar ou usar tecnologia</label>
+    </div>
+
+    <!-- Pergunta 3 -->
+    <div class="question">
+      <h3>3. Como você reage a mudanças?</h3>
+      <label><input type="radio" name="q3" value="visionario"> Adoro, é sinal de evolução!</label>
+      <label><input type="radio" name="q3" value="criativo"> Vejo como chance de inovar.</label>
+      <label><input type="radio" name="q3" value="lider"> Motivo os outros a se adaptar.</label>
+      <label><input type="radio" name="q3" value="analitico"> Analiso e planejo.</label>
+      <label><input type="radio" name="q3" value="colab"> Peço ajuda e coopero.</label>
+      <label><input type="radio" name="q3" value="sustentavel"> Penso no impacto social.</label>
+      <label><input type="radio" name="q3" value="tecnologico"> Busco soluções digitais.</label>
+    </div>
+
+    <!-- Pergunta 4 -->
+    <div class="question">
+      <h3>4. Qual ambiente de trabalho te agrada mais?</h3>
+      <label><input type="radio" name="q4" value="criativo"> Aberto e cheio de ideias novas</label>
+      <label><input type="radio" name="q4" value="lider"> Dinâmico e com pessoas motivadas</label>
+      <label><input type="radio" name="q4" value="analitico"> Organizado e desafiador</label>
+      <label><input type="radio" name="q4" value="colab"> Colaborativo e amigável</label>
+      <label><input type="radio" name="q4" value="sustentavel"> Ético e sustentável</label>
+      <label><input type="radio" name="q4" value="visionario"> Inovador e voltado para o futuro</label>
+      <label><input type="radio" name="q4" value="tecnologico"> Digital e tecnológico</label>
+    </div>
+
+    <!-- Pergunta 5 -->
+    <div class="question">
+      <h3>5. Qual dessas frases te representa?</h3>
+      <label><input type="radio" name="q5" value="criativo"> “Penso fora da caixa.”</label>
+      <label><input type="radio" name="q5" value="lider"> “Gosto de inspirar os outros.”</label>
+      <label><input type="radio" name="q5" value="analitico"> “Tudo tem uma lógica.”</label>
+      <label><input type="radio" name="q5" value="colab"> “Trabalhar junto é melhor.”</label>
+      <label><input type="radio" name="q5" value="sustentavel"> “Quero deixar o mundo melhor.”</label>
+      <label><input type="radio" name="q5" value="visionario"> “O futuro me inspira.”</label>
+      <label><input type="radio" name="q5" value="tecnologico"> “Amo aprender sobre tecnologia.”</label>
+    </div>
+
+    <!-- Pergunta 6 -->
+    <div class="question">
+      <h3>6. Como você aprende melhor?</h3>
+      <label><input type="radio" name="q6" value="criativo"> Experimentando e criando</label>
+      <label><input type="radio" name="q6" value="lider"> Com desafios e responsabilidades</label>
+      <label><input type="radio" name="q6" value="analitico"> Estudando dados e teorias</label>
+      <label><input type="radio" name="q6" value="colab"> Conversando com outras pessoas</label>
+      <label><input type="radio" name="q6" value="sustentavel"> Com exemplos reais e sociais</label>
+      <label><input type="radio" name="q6" value="visionario"> Observando tendências</label>
+      <label><input type="radio" name="q6" value="tecnologico"> Usando ferramentas digitais</label>
+    </div>
+
+    <!-- Pergunta 7 -->
+    <div class="question">
+      <h3>7. O que você valoriza mais em um emprego?</h3>
+      <label><input type="radio" name="q7" value="criativo"> Liberdade para inovar</label>
+      <label><input type="radio" name="q7" value="lider"> Crescimento e liderança</label>
+      <label><input type="radio" name="q7" value="analitico"> Estabilidade e lógica</label>
+      <label><input type="radio" name="q7" value="colab"> Trabalho em equipe</label>
+      <label><input type="radio" name="q7" value="sustentavel"> Propósito social</label>
+      <label><input type="radio" name="q7" value="visionario"> Oportunidades futuras</label>
+      <label><input type="radio" name="q7" value="tecnologico"> Uso de novas tecnologias</label>
+    </div>
+
+    <!-- Pergunta 8 -->
+    <div class="question">
+      <h3>8. Se pudesse escolher um projeto, qual seria?</h3>
+      <label><input type="radio" name="q8" value="criativo"> Criar uma marca ou produto</label>
+      <label><input type="radio" name="q8" value="lider"> Liderar um grupo de inovação</label>
+      <label><input type="radio" name="q8" value="analitico"> Analisar dados para soluções</label>
+      <label><input type="radio" name="q8" value="colab"> Ajudar uma comunidade</label>
+      <label><input type="radio" name="q8" value="sustentavel"> Criar soluções ecológicas</label>
+      <label><input type="radio" name="q8" value="visionario"> Planejar o futuro das cidades</label>
+      <label><input type="radio" name="q8" value="tecnologico"> Desenvolver uma nova tecnologia</label>
+    </div>
+
+    <!-- Pergunta 9 -->
+    <div class="question">
+      <h3>9. Qual dessas palavras mais combina com você?</h3>
+      <label><input type="radio" name="q9" value="criativo"> Original</label>
+      <label><input type="radio" name="q9" value="lider"> Determinado</label>
+      <label><input type="radio" name="q9" value="analitico"> Racional</label>
+      <label><input type="radio" name="q9" value="colab"> Amigável</label>
+      <label><input type="radio" name="q9" value="sustentavel"> Consciente</label>
+      <label><input type="radio" name="q9" value="visionario"> Visionário</label>
+      <label><input type="radio" name="q9" value="tecnologico"> Inovador</label>
+    </div>
+
+    <!-- Pergunta 10 -->
+    <div class="question">
+      <h3>10. Como você quer ser lembrado no futuro?</h3>
+      <label><input type="radio" name="q10" value="criativo"> Como alguém que criou algo novo</label>
+      <label><input type="radio" name="q10" value="lider"> Como um líder inspirador</label>
+      <label><input type="radio" name="q10" value="analitico"> Como um solucionador de problemas</label>
+      <label><input type="radio" name="q10" value="colab"> Como alguém que ajudou pessoas</label>
+      <label><input type="radio" name="q10" value="sustentavel"> Como alguém que fez o bem</label>
+      <label><input type="radio" name="q10" value="visionario"> Como um visionário do futuro</label>
+      <label><input type="radio" name="q10" value="tecnologico"> Como um inovador tecnológico</label>
+    </div>
+
+    <button type="button" onclick="calculateResult()">Ver Resultado</button>
+  </form>
+
+  <div id="result"></div>
+</section>
+
+<section>
+  <h2>🌟 Conclusão</h2>
+  <p>O mundo do trabalho muda, mas o potencial humano permanece.  
+     A inovação abre portas — e os jovens são as chaves que as destrancam.  
+     Use sua criatividade, sua curiosidade e sua coragem para construir o futuro.</p>
+  <div class="highlight">
+    <strong>“O futuro não é algo que acontece com você, é algo que você cria.”</strong>
+  </div>
+</section>
+
+<footer>
+  Desenvolvido como complemento da apresentação “Mundo do Trabalho e Inovações” – versão interativa.
+</footer>
+
+<script>
+function calculateResult() {
+  const answers = document.querySelectorAll('input[type="radio"]:checked');
+  if (answers.length < 10) {
+    alert("Por favor, responda todas as perguntas antes de ver o resultado.");
+    return;
+  }
+
+  const scores = {criativo:0, lider:0, analitico:0, colab:0, sustentavel:0, visionario:0, tecnologico:0};
+  answers.forEach(a => scores[a.value]++);
+
+  let perfil = Object.keys(scores).reduce((a,b) => scores[a] > scores[b] ? a : b);
+  let msg = "";
+  switch(perfil){
+    case "criativo":
+      msg = "🎨 <b>Criativo Inovador:</b> transforma ideias em realidade. Ideal para design, marketing e economia criativa.";
+      break;
+    case "lider":
+      msg = "🚀 <b>Líder Empreendedor:</b> inspira pessoas e promove mudanças. Combina com gestão, negócios e inovação social.";
+      break;
+    case "analitico":
+      msg = "📊 <b>Analista Tecnológico:</b> pensa com lógica e cria soluções. Áreas ideais: tecnologia, engenharia e dados.";
+      break;
+    case "colab":
+      msg = "🤝 <b>Colaborador Humanizado:</b> valoriza pessoas e empatia. Destaca-se em RH, educação e comunicação.";
+      break;
+    case "sustentavel":
+      msg = "🌱 <b>Inovador Sustentável:</b> busca progresso com propósito. Pode atuar com meio ambiente e responsabilidade social.";
+      break;
+    case "visionario":
+      msg = "🌍 <b>Visionário do Futuro:</b> antecipa tendências e cria novas ideias. Ideal para planejamento e pesquisa.";
+      break;
+    case "tecnologico":
+      msg = "💻 <b>Criador Tecnológico:</b> domina o digital e inova com impacto. Perfeito para IA, programação e startups.";
+      break;
+  }
+
+  document.getElementById("result").innerHTML = msg;
+}
+</script>
+
+</body>
+</html>
