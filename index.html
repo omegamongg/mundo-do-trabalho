@@ -1,294 +1,827 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mundo do Trabalho e Inovações</title>
-<style>
-  body {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    background: linear-gradient(135deg, #5e60ce, #48bfe3);
-    color: #fff;
-  }
-  header {
-    text-align: center;
-    padding: 60px 20px 30px;
-  }
-  header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-  }
-  header p {
-    font-size: 1.1em;
-    max-width: 700px;
-    margin: auto;
-  }
-  section {
-    max-width: 850px;
-    background: rgba(0, 0, 0, 0.3);
-    margin: 30px auto;
-    padding: 30px;
-    border-radius: 15px;
-  }
-  section h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  ul { line-height: 1.7; }
-  .highlight {
-    background: rgba(255,255,255,0.1);
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-  }
-  .question { margin: 20px 0; }
-  label {
-    display: block;
-    margin: 6px 0;
-    cursor: pointer;
-  }
-  button {
-    background: #80ed99;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    display: block;
-    margin: 25px auto;
-  }
-  button:hover { background: #56cfe1; }
-  #result {
-    background: rgba(255,255,255,0.15);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 1.1em;
-  }
-  footer {
-    text-align: center;
-    padding: 30px;
-    font-size: 0.9em;
-    opacity: 0.8;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo do Trabalho e Inovações - SENAC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4a44c9;
+            --accent: #ff6584;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f5f5f7;
+            --gray: #2a2a2a;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--darker), var(--gray));
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(108, 99, 255, 0.1), transparent 70%);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro {
+            padding: 4rem 0;
+            text-align: center;
+            background-color: var(--darker);
+        }
+
+        .intro h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .quiz-container {
+            padding: 4rem 0;
+            display: none;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: var(--gray);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question-counter {
+            text-align: right;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .question {
+            background-color: var(--gray);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .question h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .option {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .option:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .option.selected {
+            background-color: rgba(108, 99, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .results-container {
+            padding: 4rem 0;
+            display: none;
+        }
+
+        .profile-result {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .profile-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .profile-description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .charts-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .chart-box {
+            background-color: var(--gray);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .restart-btn {
+            display: block;
+            margin: 3rem auto 0;
+        }
+
+        footer {
+            background-color: var(--darker);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Mundo do Trabalho e Inovações</h1>
+            <p class="subtitle">Descubra seu perfil profissional através deste teste interativo</p>
+        </div>
+    </header>
 
-<header>
-  <h1>Mundo do Trabalho e Inovações</h1>
-  <p>As inovações estão transformando o trabalho, criando novas oportunidades e desafios.  
-     Descubra como você pode se encaixar nesse novo cenário profissional.</p>
-</header>
+    <section class="intro" id="intro">
+        <div class="container">
+            <h2>Descubra seu perfil profissional</h2>
+            <p>Responda a 15 perguntas sobre suas características pessoais e profissionais para descobrir qual é o seu perfil dominante no mundo do trabalho atual.</p>
+            <p>Com base nas suas respostas, identificaremos se seu perfil é: <strong>Criativo, Líder, Analítico, Colaborador, Sustentável, Visionário, Tecnológico ou Prático</strong>.</p>
+            <button class="btn pulse" id="start-btn">Iniciar Questionário</button>
+        </div>
+    </section>
 
-<section>
-  <h2>💡 O que está mudando</h2>
-  <ul>
-    <li>A tecnologia redefine tarefas e cria novas profissões.</li>
-    <li>O trabalho está mais conectado, criativo e dinâmico.</li>
-    <li>O profissional do futuro precisa de adaptabilidade e aprendizado contínuo.</li>
-  </ul>
-  <div class="highlight"><strong>“Inovar é transformar o modo como trabalhamos.”</strong></div>
-</section>
+    <section class="quiz-container" id="quiz-container">
+        <div class="container">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="question-counter" id="question-counter">Pergunta 1 de 15</div>
+            
+            <div class="question fade-in" id="question-container">
+                <h3 id="question-text">Pergunta será carregada aqui</h3>
+                <div class="options" id="options-container">
+                    <!-- Opções serão carregadas aqui via JavaScript -->
+                </div>
+                <div class="navigation">
+                    <button class="btn" id="prev-btn" disabled>Anterior</button>
+                    <button class="btn" id="next-btn">Próxima</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <h2>🧠 O Jovem e o Futuro do Trabalho</h2>
-  <ul>
-    <li>Os jovens são protagonistas da era digital.</li>
-    <li>São criativos, conectados e capazes de aprender rápido.</li>
-    <li>Com propósito e inovação, podem criar seus próprios caminhos.</li>
-  </ul>
-</section>
+    <section class="results-container" id="results-container">
+        <div class="container">
+            <div class="profile-result fade-in">
+                <h2 class="profile-title" id="profile-title">Seu Perfil</h2>
+                <p class="profile-description" id="profile-description">Descrição do perfil será carregada aqui</p>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-box fade-in">
+                    <h3 class="chart-title">Distribuição do seu Perfil</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="pie-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-box fade-in">
+                    <h3 class="chart-title">Comparação de Perfis</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="bar-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn restart-btn" id="restart-btn">Fazer o Teste Novamente</button>
+        </div>
+    </section>
 
-<section>
-  <h2>🧩 Teste: Descubra Seu Perfil Profissional</h2>
-  <p>Responda às perguntas e descubra qual perfil combina mais com você no mundo do trabalho e das inovações.</p>
+    <footer>
+        <div class="container">
+            <p>Projeto Interativo - Mundo do Trabalho e Inovações | SENAC</p>
+        </div>
+    </footer>
 
-  <form id="quizForm">
-    <!-- Pergunta 1 -->
-    <div class="question">
-      <h3>1. O que mais te motiva em um trabalho?</h3>
-      <label><input type="radio" name="q1" value="criativo"> Criar e inovar</label>
-      <label><input type="radio" name="q1" value="lider"> Liderar pessoas</label>
-      <label><input type="radio" name="q1" value="analitico"> Resolver problemas complexos</label>
-      <label><input type="radio" name="q1" value="colab"> Ajudar e colaborar</label>
-      <label><input type="radio" name="q1" value="sustentavel"> Contribuir com o planeta</label>
-      <label><input type="radio" name="q1" value="visionario"> Pensar no futuro</label>
-      <label><input type="radio" name="q1" value="tecnologico"> Trabalhar com tecnologia</label>
-    </div>
+    <script>
+        // Dados do questionário
+        const questions = [
+            {
+                text: "Como você costuma resolver problemas?",
+                options: [
+                    { text: "Analisando todos os detalhes antes de agir", profiles: { analitico: 3 } },
+                    { text: "Pensando em soluções criativas e inovadoras", profiles: { criativo: 3 } },
+                    { text: "Consultando outras pessoas para chegar a uma solução", profiles: { colaborador: 3 } },
+                    { text: "Tomando decisões rápidas e práticas", profiles: { pratico: 3 } }
+                ]
+            },
+            {
+                text: "Qual dessas atividades você mais gosta?",
+                options: [
+                    { text: "Organizar informações e dados", profiles: { analitico: 2 } },
+                    { text: "Desenhar, pintar ou criar coisas novas", profiles: { criativo: 2 } },
+                    { text: "Trabalhar em equipe em projetos desafiadores", profiles: { colaborador: 2 } },
+                    { text: "Implementar soluções que tragam resultados imediatos", profiles: { pratico: 2 } }
+                ]
+            },
+            {
+                text: "Como você se descreveria em um ambiente de trabalho?",
+                options: [
+                    { text: "Estratégico e com visão de futuro", profiles: { visionario: 3 } },
+                    { text: "Focado em resultados e eficiência", profiles: { tecnologico: 2, pratico: 1 } },
+                    { text: "Preocupado com o impacto social e ambiental", profiles: { sustentavel: 3 } },
+                    { text: "Capaz de motivar e guiar outras pessoas", profiles: { lider: 3 } }
+                ]
+            },
+            {
+                text: "Qual é sua abordagem em relação a novas tecnologias?",
+                options: [
+                    { text: "Sou um dos primeiros a experimentar novidades", profiles: { tecnologico: 3 } },
+                    { text: "Avalio cuidadosamente antes de adotar", profiles: { analitico: 2 } },
+                    { text: "Penso em como a tecnologia pode melhorar vidas", profiles: { sustentavel: 2, visionario: 1 } },
+                    { text: "Prefiro o que já conheço e funciona", profiles: { pratico: 3 } }
+                ]
+            },
+            {
+                text: "Quando você precisa tomar uma decisão importante:",
+                options: [
+                    { text: "Reúno o máximo de informações possível", profiles: { analitico: 2 } },
+                    { text: "Confio na minha intuição e visão", profiles: { visionario: 2 } },
+                    { text: "Consulte minha equipe ou colegas", profiles: { colaborador: 2, lider: 1 } },
+                    { text: "Avalio os prós e contras de forma objetiva", profiles: { pratico: 2 } }
+                ]
+            },
+            {
+                text: "Como você lida com mudanças no ambiente de trabalho?",
+                options: [
+                    { text: "Vejo como uma oportunidade para inovar", profiles: { criativo: 2 } },
+                    { text: "Analiso os impactos antes de me adaptar", profiles: { analitico: 2 } },
+                    { text: "Mobilizo a equipe para enfrentar os desafios", profiles: { lider: 2 } },
+                    { text: "Foco em manter a estabilidade do grupo", profiles: { colaborador: 2 } }
+                ]
+            },
+            {
+                text: "Qual destas frases mais combina com você?",
+                options: [
+                    { text: "Gosto de explorar novas ideias e possibilidades", profiles: { criativo: 2, visionario: 1 } },
+                    { text: "Prefiro seguir métodos testados e comprovados", profiles: { pratico: 2 } },
+                    { text: "Acredito no poder da colaboração", profiles: { colaborador: 2 } },
+                    { text: "Busco eficiência em tudo que faço", profiles: { tecnologico: 2 } }
+                ]
+            },
+            {
+                text: "Em um projeto, qual papel você geralmente assume?",
+                options: [
+                    { text: "O planejador que organiza as etapas", profiles: { analitico: 2 } },
+                    { text: "O inovador que traz novas ideias", profiles: { criativo: 2 } },
+                    { text: "O motivador que mantém a equipe unida", profiles: { lider: 2 } },
+                    { text: "O executor que coloca as ideias em prática", profiles: { pratico: 2 } }
+                ]
+            },
+            {
+                text: "O que mais te motiva no trabalho?",
+                options: [
+                    { text: "Resolver problemas complexos", profiles: { analitico: 2 } },
+                    { text: "Criar algo único e original", profiles: { criativo: 2 } },
+                    { text: "Trabalhar com pessoas talentosas", profiles: { colaborador: 2 } },
+                    { text: "Ver os resultados concretos do meu trabalho", profiles: { pratico: 2 } }
+                ]
+            },
+            {
+                text: "Como você vê o futuro do trabalho?",
+                options: [
+                    { text: "Dominado pela inteligência artificial e automação", profiles: { tecnologico: 2 } },
+                    { text: "Focado em sustentabilidade e responsabilidade social", profiles: { sustentavel: 2 } },
+                    { text: "Com equipes mais diversificadas e colaborativas", profiles: { colaborador: 2 } },
+                    { text: "Exigindo adaptação constante e aprendizado", profiles: { visionario: 2 } }
+                ]
+            },
+            {
+                text: "Qual é sua maior força profissional?",
+                options: [
+                    { text: "Capacidade de análise e raciocínio lógico", profiles: { analitico: 3 } },
+                    { text: "Criatividade e pensamento fora da caixa", profiles: { criativo: 3 } },
+                    { text: "Habilidade de liderança e tomada de decisão", profiles: { lider: 3 } },
+                    { text: "Capacidade de trabalhar bem em equipe", profiles: { colaborador: 3 } }
+                ]
+            },
+            {
+                text: "Quando você enfrenta um desafio:",
+                options: [
+                    { text: "Quebro o problema em partes menores para resolver", profiles: { analitico: 2 } },
+                    { text: "Penso em abordagens completamente novas", profiles: { criativo: 2 } },
+                    { text: "Busco apoio e diferentes perspectivas", profiles: { colaborador: 2 } },
+                    { text: "Foco na solução mais direta e eficiente", profiles: { pratico: 2 } }
+                ]
+            },
+            {
+                text: "Como você se mantém atualizado no seu campo?",
+                options: [
+                    { text: "Participando de cursos e treinamentos formais", profiles: { analitico: 1 } },
+                    { text: "Experimentando novas ferramentas e técnicas", profiles: { tecnologico: 2 } },
+                    { text: "Conectando-me com profissionais da área", profiles: { colaborador: 2 } },
+                    { text: "Lendo sobre tendências e inovações", profiles: { visionario: 2 } }
+                ]
+            },
+            {
+                text: "Qual destes valores é mais importante para você?",
+                options: [
+                    { text: "Inovação e criatividade", profiles: { criativo: 2 } },
+                    { text: "Eficiência e produtividade", profiles: { tecnologico: 2 } },
+                    { text: "Sustentabilidade e responsabilidade", profiles: { sustentavel: 2 } },
+                    { text: "Colaboração e trabalho em equipe", profiles: { colaborador: 2 } }
+                ]
+            },
+            {
+                text: "Como você contribui para o sucesso de uma equipe?",
+                options: [
+                    { text: "Fornecendo análise de dados e informações", profiles: { analitico: 2 } },
+                    { text: "Propondo ideias criativas e soluções", profiles: { criativo: 2 } },
+                    { text: "Coordenando esforços e mantendo o foco", profiles: { lider: 2 } },
+                    { text: "Garantindo que as tarefas sejam executadas", profiles: { pratico: 2 } }
+                ]
+            }
+        ];
 
-    <!-- Pergunta 2 -->
-    <div class="question">
-      <h3>2. Qual dessas atividades você mais gosta?</h3>
-      <label><input type="radio" name="q2" value="criativo"> Criar artes ou conteúdos</label>
-      <label><input type="radio" name="q2" value="lider"> Organizar equipes</label>
-      <label><input type="radio" name="q2" value="analitico"> Resolver desafios de lógica</label>
-      <label><input type="radio" name="q2" value="colab"> Trabalhar em grupo</label>
-      <label><input type="radio" name="q2" value="sustentavel"> Projetos ambientais</label>
-      <label><input type="radio" name="q2" value="visionario"> Pensar em ideias de futuro</label>
-      <label><input type="radio" name="q2" value="tecnologico"> Programar ou usar tecnologia</label>
-    </div>
+        // Perfis profissionais
+        const profiles = {
+            criativo: {
+                title: "Criativo",
+                description: "Você é uma pessoa inovadora que sempre busca novas formas de expressão e solução de problemas. Sua mente está constantemente gerando ideias originais e você se destaca por sua capacidade de pensar fora da caixa. No mundo do trabalho atual, sua criatividade é um diferencial valioso para inovar em produtos, serviços e processos."
+            },
+            lider: {
+                title: "Líder",
+                description: "Você possui habilidades natas de liderança, sendo capaz de motivar, inspirar e guiar outras pessoas. Sua visão estratégica e capacidade de tomar decisões fazem de você um elemento fundamental em qualquer equipe. No ambiente profissional, você se destaca por sua capacidade de gerenciar projetos e pessoas com eficiência."
+            },
+            analitico: {
+                title: "Analítico",
+                description: "Sua mente funciona como um processador de informações, sempre buscando padrões, dados e evidências antes de tomar decisões. Você se destaca por sua capacidade de resolver problemas complexos através do raciocínio lógico e análise detalhada. No mercado de trabalho, sua habilidade de transformar dados em insights valiosos é extremamente requisitada."
+            },
+            colaborador: {
+                title: "Colaborador",
+                description: "Você é o coração de qualquer equipe, sempre buscando a harmonia e a cooperação entre os membros. Sua capacidade de ouvir, compreender diferentes perspectivas e trabalhar em conjunto faz de você um profissional essencial em ambientes que valorizam o trabalho em equipe. Sua empatia e habilidades sociais são seus maiores trunfos."
+            },
+            sustentavel: {
+                title: "Sustentável",
+                description: "Você tem uma visão consciente e responsável sobre o trabalho e o mundo. Preocupa-se com o impacto social e ambiental das atividades profissionais e busca sempre soluções que equilibrem resultados com sustentabilidade. No mercado atual, sua perspectiva é cada vez mais valorizada por empresas que buscam não apenas lucro, mas também propósito."
+            },
+            visionario: {
+                title: "Visionário",
+                description: "Sua mente está sempre alguns passos à frente, antecipando tendências e visualizando possibilidades futuras. Você tem uma capacidade notável de conectar pontos aparentemente desconexos e enxergar o panorama geral. No mundo profissional, sua visão estratégica e capacidade de inovar são diferenciais competitivos importantes."
+            },
+            tecnologico: {
+                title: "Tecnológico",
+                description: "Você é fascinado por tecnologia e tem uma habilidade natural para entender e utilizar ferramentas digitais. Está sempre atualizado sobre as últimas inovações tecnológicas e como elas podem ser aplicadas para melhorar processos e resultados. Na era digital, seu perfil é extremamente valorizado em praticamente todos os setores."
+            },
+            pratico: {
+                title: "Prático",
+                description: "Você é uma pessoa focada em resultados, que valoriza a eficiência e a aplicabilidade das soluções. Sua abordagem direta e objetiva permite que você transforme ideias em ações concretas de maneira rápida e eficaz. No ambiente de trabalho, sua capacidade de execução e pragmatismo são qualidades muito apreciadas."
+            }
+        };
 
-    <!-- Pergunta 3 -->
-    <div class="question">
-      <h3>3. Como você reage a mudanças?</h3>
-      <label><input type="radio" name="q3" value="visionario"> Adoro, é sinal de evolução!</label>
-      <label><input type="radio" name="q3" value="criativo"> Vejo como chance de inovar.</label>
-      <label><input type="radio" name="q3" value="lider"> Motivo os outros a se adaptar.</label>
-      <label><input type="radio" name="q3" value="analitico"> Analiso e planejo.</label>
-      <label><input type="radio" name="q3" value="colab"> Peço ajuda e coopero.</label>
-      <label><input type="radio" name="q3" value="sustentavel"> Penso no impacto social.</label>
-      <label><input type="radio" name="q3" value="tecnologico"> Busco soluções digitais.</label>
-    </div>
+        // Variáveis globais
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let userProfileScores = {
+            criativo: 0,
+            lider: 0,
+            analitico: 0,
+            colaborador: 0,
+            sustentavel: 0,
+            visionario: 0,
+            tecnologico: 0,
+            pratico: 0
+        };
 
-    <!-- Pergunta 4 -->
-    <div class="question">
-      <h3>4. Qual ambiente de trabalho te agrada mais?</h3>
-      <label><input type="radio" name="q4" value="criativo"> Aberto e cheio de ideias novas</label>
-      <label><input type="radio" name="q4" value="lider"> Dinâmico e com pessoas motivadas</label>
-      <label><input type="radio" name="q4" value="analitico"> Organizado e desafiador</label>
-      <label><input type="radio" name="q4" value="colab"> Colaborativo e amigável</label>
-      <label><input type="radio" name="q4" value="sustentavel"> Ético e sustentável</label>
-      <label><input type="radio" name="q4" value="visionario"> Inovador e voltado para o futuro</label>
-      <label><input type="radio" name="q4" value="tecnologico"> Digital e tecnológico</label>
-    </div>
+        // Elementos DOM
+        const introSection = document.getElementById('intro');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const startBtn = document.getElementById('start-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const progressBar = document.getElementById('progress-bar');
+        const questionCounter = document.getElementById('question-counter');
+        const profileTitle = document.getElementById('profile-title');
+        const profileDescription = document.getElementById('profile-description');
+        const restartBtn = document.getElementById('restart-btn');
 
-    <!-- Pergunta 5 -->
-    <div class="question">
-      <h3>5. Qual dessas frases te representa?</h3>
-      <label><input type="radio" name="q5" value="criativo"> “Penso fora da caixa.”</label>
-      <label><input type="radio" name="q5" value="lider"> “Gosto de inspirar os outros.”</label>
-      <label><input type="radio" name="q5" value="analitico"> “Tudo tem uma lógica.”</label>
-      <label><input type="radio" name="q5" value="colab"> “Trabalhar junto é melhor.”</label>
-      <label><input type="radio" name="q5" value="sustentavel"> “Quero deixar o mundo melhor.”</label>
-      <label><input type="radio" name="q5" value="visionario"> “O futuro me inspira.”</label>
-      <label><input type="radio" name="q5" value="tecnologico"> “Amo aprender sobre tecnologia.”</label>
-    </div>
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            startBtn.addEventListener('click', startQuiz);
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+        });
 
-    <!-- Pergunta 6 -->
-    <div class="question">
-      <h3>6. Como você aprende melhor?</h3>
-      <label><input type="radio" name="q6" value="criativo"> Experimentando e criando</label>
-      <label><input type="radio" name="q6" value="lider"> Com desafios e responsabilidades</label>
-      <label><input type="radio" name="q6" value="analitico"> Estudando dados e teorias</label>
-      <label><input type="radio" name="q6" value="colab"> Conversando com outras pessoas</label>
-      <label><input type="radio" name="q6" value="sustentavel"> Com exemplos reais e sociais</label>
-      <label><input type="radio" name="q6" value="visionario"> Observando tendências</label>
-      <label><input type="radio" name="q6" value="tecnologico"> Usando ferramentas digitais</label>
-    </div>
+        // Funções
+        function startQuiz() {
+            introSection.style.display = 'none';
+            quizContainer.style.display = 'block';
+            loadQuestion(currentQuestion);
+        }
 
-    <!-- Pergunta 7 -->
-    <div class="question">
-      <h3>7. O que você valoriza mais em um emprego?</h3>
-      <label><input type="radio" name="q7" value="criativo"> Liberdade para inovar</label>
-      <label><input type="radio" name="q7" value="lider"> Crescimento e liderança</label>
-      <label><input type="radio" name="q7" value="analitico"> Estabilidade e lógica</label>
-      <label><input type="radio" name="q7" value="colab"> Trabalho em equipe</label>
-      <label><input type="radio" name="q7" value="sustentavel"> Propósito social</label>
-      <label><input type="radio" name="q7" value="visionario"> Oportunidades futuras</label>
-      <label><input type="radio" name="q7" value="tecnologico"> Uso de novas tecnologias</label>
-    </div>
+        function loadQuestion(index) {
+            const question = questions[index];
+            questionText.textContent = question.text;
+            
+            // Atualizar contador
+            questionCounter.textContent = `Pergunta ${index + 1} de ${questions.length}`;
+            
+            // Atualizar barra de progresso
+            const progress = ((index + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Limpar opções anteriores
+            optionsContainer.innerHTML = '';
+            
+            // Adicionar novas opções
+            question.options.forEach((option, optionIndex) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[index] === optionIndex) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option.text;
+                optionElement.addEventListener('click', () => selectOption(optionIndex));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Atualizar estado dos botões de navegação
+            prevBtn.disabled = index === 0;
+            nextBtn.textContent = index === questions.length - 1 ? 'Ver Resultados' : 'Próxima';
+        }
 
-    <!-- Pergunta 8 -->
-    <div class="question">
-      <h3>8. Se pudesse escolher um projeto, qual seria?</h3>
-      <label><input type="radio" name="q8" value="criativo"> Criar uma marca ou produto</label>
-      <label><input type="radio" name="q8" value="lider"> Liderar um grupo de inovação</label>
-      <label><input type="radio" name="q8" value="analitico"> Analisar dados para soluções</label>
-      <label><input type="radio" name="q8" value="colab"> Ajudar uma comunidade</label>
-      <label><input type="radio" name="q8" value="sustentavel"> Criar soluções ecológicas</label>
-      <label><input type="radio" name="q8" value="visionario"> Planejar o futuro das cidades</label>
-      <label><input type="radio" name="q8" value="tecnologico"> Desenvolver uma nova tecnologia</label>
-    </div>
+        function selectOption(optionIndex) {
+            // Remover seleção anterior
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            
+            // Selecionar nova opção
+            options[optionIndex].classList.add('selected');
+            
+            // Salvar resposta
+            userAnswers[currentQuestion] = optionIndex;
+            
+            // Atualizar pontuação dos perfis
+            const selectedOption = questions[currentQuestion].options[optionIndex];
+            Object.keys(selectedOption.profiles).forEach(profile => {
+                userProfileScores[profile] += selectedOption.profiles[profile];
+            });
+        }
 
-    <!-- Pergunta 9 -->
-    <div class="question">
-      <h3>9. Qual dessas palavras mais combina com você?</h3>
-      <label><input type="radio" name="q9" value="criativo"> Original</label>
-      <label><input type="radio" name="q9" value="lider"> Determinado</label>
-      <label><input type="radio" name="q9" value="analitico"> Racional</label>
-      <label><input type="radio" name="q9" value="colab"> Amigável</label>
-      <label><input type="radio" name="q9" value="sustentavel"> Consciente</label>
-      <label><input type="radio" name="q9" value="visionario"> Visionário</label>
-      <label><input type="radio" name="q9" value="tecnologico"> Inovador</label>
-    </div>
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        }
 
-    <!-- Pergunta 10 -->
-    <div class="question">
-      <h3>10. Como você quer ser lembrado no futuro?</h3>
-      <label><input type="radio" name="q10" value="criativo"> Como alguém que criou algo novo</label>
-      <label><input type="radio" name="q10" value="lider"> Como um líder inspirador</label>
-      <label><input type="radio" name="q10" value="analitico"> Como um solucionador de problemas</label>
-      <label><input type="radio" name="q10" value="colab"> Como alguém que ajudou pessoas</label>
-      <label><input type="radio" name="q10" value="sustentavel"> Como alguém que fez o bem</label>
-      <label><input type="radio" name="q10" value="visionario"> Como um visionário do futuro</label>
-      <label><input type="radio" name="q10" value="tecnologico"> Como um inovador tecnológico</label>
-    </div>
+        function showNextQuestion() {
+            // Verificar se uma opção foi selecionada
+            if (userAnswers[currentQuestion] === undefined) {
+                alert('Por favor, selecione uma opção antes de continuar.');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            } else {
+                showResults();
+            }
+        }
 
-    <button type="button" onclick="calculateResult()">Ver Resultado</button>
-  </form>
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            // Determinar perfil dominante
+            let dominantProfile = '';
+            let highestScore = 0;
+            
+            Object.keys(userProfileScores).forEach(profile => {
+                if (userProfileScores[profile] > highestScore) {
+                    highestScore = userProfileScores[profile];
+                    dominantProfile = profile;
+                }
+            });
+            
+            // Exibir informações do perfil
+            profileTitle.textContent = profiles[dominantProfile].title;
+            profileDescription.textContent = profiles[dominantProfile].description;
+            
+            // Criar gráficos
+            createPieChart(dominantProfile);
+            createBarChart();
+        }
 
-  <div id="result"></div>
-</section>
+        function createPieChart(dominantProfile) {
+            const ctx = document.getElementById('pie-chart').getContext('2d');
+            
+            // Preparar dados para o gráfico de pizza
+            const labels = Object.keys(profiles);
+            const data = labels.map(profile => userProfileScores[profile]);
+            const backgroundColors = [
+                '#6c63ff', '#4a44c9', '#ff6584', '#36a2eb',
+                '#4bc0c0', '#ff9f40', '#9966ff', '#ffcd56'
+            ];
+            
+            // Destacar o perfil dominante
+            const highlightColors = backgroundColors.map((color, index) => 
+                labels[index] === dominantProfile ? color : `${color}80`
+            );
+            
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels.map(profile => profiles[profile].title),
+                    datasets: [{
+                        data: data,
+                        backgroundColor: highlightColors,
+                        borderColor: '#121212',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#f5f5f7',
+                                font: {
+                                    family: 'Poppins',
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} pontos (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
-<section>
-  <h2>🌟 Conclusão</h2>
-  <p>O mundo do trabalho muda, mas o potencial humano permanece.  
-     A inovação abre portas — e os jovens são as chaves que as destrancam.  
-     Use sua criatividade, sua curiosidade e sua coragem para construir o futuro.</p>
-  <div class="highlight">
-    <strong>“O futuro não é algo que acontece com você, é algo que você cria.”</strong>
-  </div>
-</section>
+        function createBarChart() {
+            const ctx = document.getElementById('bar-chart').getContext('2d');
+            
+            // Preparar dados para o gráfico de barras
+            const labels = Object.keys(profiles).map(profile => profiles[profile].title);
+            const data = Object.keys(userProfileScores).map(profile => userProfileScores[profile]);
+            const backgroundColors = [
+                '#6c63ff', '#4a44c9', '#ff6584', '#36a2eb',
+                '#4bc0c0', '#ff9f40', '#9966ff', '#ffcd56'
+            ];
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Pontuação',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderColor: backgroundColors.map(color => color.replace('0.8', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#f5f5f7',
+                                font: {
+                                    family: 'Poppins'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#f5f5f7',
+                                font: {
+                                    family: 'Poppins',
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Pontuação: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
-<footer>
-  Desenvolvido como complemento da apresentação “Mundo do Trabalho e Inovações” – versão interativa.
-</footer>
-
-<script>
-function calculateResult() {
-  const answers = document.querySelectorAll('input[type="radio"]:checked');
-  if (answers.length < 10) {
-    alert("Por favor, responda todas as perguntas antes de ver o resultado.");
-    return;
-  }
-
-  const scores = {criativo:0, lider:0, analitico:0, colab:0, sustentavel:0, visionario:0, tecnologico:0};
-  answers.forEach(a => scores[a.value]++);
-
-  let perfil = Object.keys(scores).reduce((a,b) => scores[a] > scores[b] ? a : b);
-  let msg = "";
-  switch(perfil){
-    case "criativo":
-      msg = "🎨 <b>Criativo Inovador:</b> transforma ideias em realidade. Ideal para design, marketing e economia criativa.";
-      break;
-    case "lider":
-      msg = "🚀 <b>Líder Empreendedor:</b> inspira pessoas e promove mudanças. Combina com gestão, negócios e inovação social.";
-      break;
-    case "analitico":
-      msg = "📊 <b>Analista Tecnológico:</b> pensa com lógica e cria soluções. Áreas ideais: tecnologia, engenharia e dados.";
-      break;
-    case "colab":
-      msg = "🤝 <b>Colaborador Humanizado:</b> valoriza pessoas e empatia. Destaca-se em RH, educação e comunicação.";
-      break;
-    case "sustentavel":
-      msg = "🌱 <b>Inovador Sustentável:</b> busca progresso com propósito. Pode atuar com meio ambiente e responsabilidade social.";
-      break;
-    case "visionario":
-      msg = "🌍 <b>Visionário do Futuro:</b> antecipa tendências e cria novas ideias. Ideal para planejamento e pesquisa.";
-      break;
-    case "tecnologico":
-      msg = "💻 <b>Criador Tecnológico:</b> domina o digital e inova com impacto. Perfeito para IA, programação e startups.";
-      break;
-  }
-
-  document.getElementById("result").innerHTML = msg;
-}
-</script>
-
+        function restartQuiz() {
+            // Reiniciar variáveis
+            currentQuestion = 0;
+            userAnswers = [];
+            userProfileScores = {
+                criativo: 0,
+                lider: 0,
+                analitico: 0,
+                colaborador: 0,
+                sustentavel: 0,
+                visionario: 0,
+                tecnologico: 0,
+                pratico: 0
+            };
+            
+            // Mostrar introdução novamente
+            resultsContainer.style.display = 'none';
+            introSection.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
